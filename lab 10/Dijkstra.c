@@ -15,15 +15,27 @@ int minDistance(int dist[], bool sptSet[], int V)
     return min_index;
 }
 
+void printPath(int parent[], int j)
+{
+    // Base case: if j is the source
+    if (parent[j] == -1)
+        return;
+
+    printPath(parent, parent[j]);
+
+    printf(" -> %d", j);
+}
+
 void printSolution(int dist[], int parent[], int src, int V)
 {
-    printf("Vertex \t\t Distance from Source \t Parent\n");
+    printf("Vertex \t\t Distance from Source \t Path\n");
     for (int i = 0; i < V; i++)
     {
-        printf("%d \t\t\t %d \t\t\t\t %d\n", i, dist[i], parent[i]);
+        printf("%d \t\t\t %d \t\t\t\t %d", i, dist[i], src);
+        printPath(parent, i);
+        printf("\n");
     }
 }
-//if statement needed 
 
 void dijkstra(int graph[MAX_VERTICES][MAX_VERTICES], int src, int V)
 {
